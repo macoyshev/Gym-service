@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  api:
+    container_name: api_container
+    build: .
+    command: uvicorn --factory app:create_app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    restart: on-failure
+
+  admin:
+    container_name: admin_container
+    build: .
+    environment:
+      - FLASK_APP=app.admin:create_admin
+      - FLASK_ENV=development
+    command: flask run --port=6000
+    ports:
+      - "6000:6000"
+    restart: on-failure
