@@ -17,11 +17,13 @@ At the moment, the application presents as API.
 To see full documentation, launch the [app](#run-app) and go 
 to `http://0.0.0.0:8000/docs`
 
-### Create venv:
-    make venv
 
 ### Run app in docker
     make up-docker
+    
+### Create venv:
+    make venv
+_Note: if you are not launching the app in docker, then execute this command before running the app localy_
 
 ### Run app locally
     make up
