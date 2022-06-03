@@ -23,10 +23,10 @@ jobs:
         poetry install
     - name: Lint
       run: |
-        flake8 --jobs 4 --statistics --show-source tests app
-        pylint --jobs 4 --rcfile=setup.cfg tests app
-        mypy tests app
-        black --skip-string-normalization --check tests app
+        poerty run flake8 --jobs 4 --statistics --show-source tests app
+        poerty run pylint --jobs 4 --rcfile=setup.cfg tests app
+        poerty run mypy tests app
+        poerty run black --skip-string-normalization --check tests app
     - name: Test
       run: |
         pytest -v --asyncio-mode=strict tests
