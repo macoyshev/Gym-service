@@ -1,14 +1,8 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
 name: Python application
 
 on:
   push:
     branches: [ master ]
-    
-permissions:
-  contents: read
 
 jobs:
 
@@ -22,15 +16,17 @@ jobs:
         python-version: "3.10"
     - name: Install dependencies
       run: |
+        python -m venv .venv
+        source .venv/bin/activate
         python -m pip install --upgrade pip
         python -m pip install poetry
         poetry install
     - name: Lint
       run: |
-        .venv/bin/flake8 --jobs 4 --statistics --show-source tests app
-        .venv/bin/pylint --jobs 4 --rcfile=setup.cfg tests app
-        .venv/bin/mypy tests app
-        .venv/bin/black --skip-string-normalization --check tests app
+        flake8 --jobs 4 --statistics --show-source tests app
+        pylint --jobs 4 --rcfile=setup.cfg tests app
+        mypy tests app
+        black --skip-string-normalization --check tests app
     - name: Test
       run: |
-        .venv/bin/pytest -v --asyncio-mode=strict tests
+        pytest -v --asyncio-mode=strict tests
