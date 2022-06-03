@@ -25,12 +25,12 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install poetry
         poetry install
-        poetry shell
     - name: Lint
       run: |
-       flake8 --jobs 4 --statistics --show-source tests app
-       pylint --jobs 4 --rcfile=setup.cfg tests app
-       mypy tests app
-       black --skip-string-normalization --check tests app
+        .venv/bin/flake8 --jobs 4 --statistics --show-source tests app
+        .venv/bin/pylint --jobs 4 --rcfile=setup.cfg tests app
+        .venv/bin/mypy tests app
+        .venv/bin/black --skip-string-normalization --check tests app
     - name: Test
-      run: pytest -v --asyncio-mode=strict tests
+      run: |
+        .venv/bin/pytest -v --asyncio-mode=strict tests
