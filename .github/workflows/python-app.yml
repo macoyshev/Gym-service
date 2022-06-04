@@ -5,8 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
     - name: Chekout repository
@@ -18,7 +17,7 @@ jobs:
         python-version: "3.10"
         
     - name: Install Poetry
-      uses: snok/install-poetry@v1
+      uses: snok/install-poetry@v1 
       
     - name: Install dependences
       run: poetry install
@@ -29,4 +28,18 @@ jobs:
         poetry run pylint --jobs 4 --rcfile=setup.cfg tests app
         poetry run mypy tests app
         poetry run black --skip-string-normalization --check tests app
+        
+  deploy:
+    needs: [lint]
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "gym-service" #Must be unique in Heroku
+          heroku_email: "make.oynoshev@gmail.com"
+          usedocker: true
+      
+    
 
