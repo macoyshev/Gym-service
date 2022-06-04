@@ -29,7 +29,4 @@ jobs:
         poetry run pylint --jobs 4 --rcfile=setup.cfg tests app
         poetry run mypy tests app
         poetry run black --skip-string-normalization --check tests app
-        
-    - name: Test
-      run: |
-        poetry run pytest -v --asyncio-mode=strict tests
+

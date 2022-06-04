@@ -6,7 +6,6 @@ authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-requests = '*'
 fastapi = "^0.75.2"
 SQLAlchemy = {extras = ["asyncio"], version = "^1.4.36"}
 Flask-Admin = "^1.6.0"
