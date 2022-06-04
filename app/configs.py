@@ -9,7 +9,7 @@ class Settings(BaseSettings):
 
     admin_key: Optional[str] = 'admin key'
 
-    secret_key: SecretStr = SecretStr('secret key')
+    secret_key: SecretStr = SecretStr('test')
     algorithm: SecretStr = SecretStr('HS256')
     token_ttl: int = 30
 
