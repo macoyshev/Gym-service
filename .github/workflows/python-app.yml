@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build_lint:
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Chekout repository
@@ -34,7 +34,7 @@ jobs:
         poetry export -f requirements.txt --output requirements.txt
 
   deploy:
-    needs: [lint]
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
